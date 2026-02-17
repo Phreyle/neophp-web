@@ -1,0 +1,30 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gridGlow" x1="0" y1="0" x2="1200" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#B026FF" stop-opacity="0.7" />
+      <stop offset="50%" stop-color="#3B82F6" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#38F2FF" stop-opacity="0.7" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="#0B0D14" />
+  <g stroke="url(#gridGlow)" stroke-width="1">
+    <path d="M0 120H1200" />
+    <path d="M0 240H1200" />
+    <path d="M0 360H1200" />
+    <path d="M0 480H1200" />
+    <path d="M0 600H1200" />
+    <path d="M0 720H1200" />
+    <path d="M0 840H1200" />
+    <path d="M120 0V900" />
+    <path d="M240 0V900" />
+    <path d="M360 0V900" />
+    <path d="M480 0V900" />
+    <path d="M600 0V900" />
+    <path d="M720 0V900" />
+    <path d="M840 0V900" />
+    <path d="M960 0V900" />
+    <path d="M1080 0V900" />
+  </g>
+  <circle cx="940" cy="240" r="140" fill="#B026FF" fill-opacity="0.2" />
+  <circle cx="320" cy="620" r="180" fill="#38F2FF" fill-opacity="0.16" />
+</svg>
