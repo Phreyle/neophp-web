@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Script from "next/script";
+import { Suspense } from "react";
 import Button from "@/components/Button";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
@@ -429,7 +430,9 @@ export default function Home() {
               </div>
             </div>
             <div className="rounded-3xl border border-white/10 bg-white/5 p-8 neon-ring">
-              <ContactForm />
+              <Suspense fallback={<div className="text-sm text-slate-300">Loading form...</div>}>
+                <ContactForm />
+              </Suspense>
             </div>
           </div>
         </section>
