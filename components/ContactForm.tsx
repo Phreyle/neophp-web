@@ -9,14 +9,16 @@ type FormState = {
   name: string;
   email: string;
   message: string;
+  website: string; // honeypot
 };
 
-type FormErrors = Partial<Record<keyof FormState, string>>;
+type FormErrors = Partial<Record<keyof Omit<FormState, "website">, string>>;
 
 const initialState: FormState = {
   name: "",
   email: "",
   message: "",
+  website: "",
 };
 
 export default function ContactForm() {
@@ -24,10 +26,12 @@ export default function ContactForm() {
   const [formState, setFormState] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
 
   useEffect(() => {
     const service = searchParams.get("service");
-
+    
     if (service && !formState.message) {
       setFormState((prev) => ({
         ...prev,
@@ -61,14 +65,44 @@ export default function ContactForm() {
     return nextErrors;
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setSubmitted(false);
+    setServerError(null);
+
     const nextErrors = validate();
     setErrors(nextErrors);
+    if (Object.keys(nextErrors).length !== 0) return;
 
-    if (Object.keys(nextErrors).length === 0) {
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formState.name.trim(),
+          email: formState.email.trim(),
+          message: formState.message.trim(),
+          website: formState.website.trim(), // honeypot
+        }),
+      });
+
+      const data = (await res.json().catch(() => null)) as
+        | { ok?: boolean; error?: string }
+        | null;
+
+      if (!res.ok || !data?.ok) {
+        setServerError(data?.error || "Failed to send. Please try again.");
+        return;
+      }
+
+      
       setSubmitted(true);
       setFormState(initialState);
+    } catch {
+      setServerError("Failed to send. Please check your connection and try again.");
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -79,6 +113,21 @@ export default function ContactForm() {
       noValidate
       aria-describedby="form-status"
     >
+      {/* Honeypot field (hidden) */}
+      <div className="hidden">
+        <label>
+          Website
+          <input
+            type="text"
+            name="website"
+            value={formState.website}
+            onChange={handleChange}
+            autoComplete="off"
+            tabIndex={-1}
+          />
+        </label>
+      </div>
+
       <div className="grid gap-4 md:grid-cols-2">
         <label className="flex flex-col gap-2 text-sm text-slate-300">
           Name
@@ -99,6 +148,7 @@ export default function ContactForm() {
             </span>
           ) : null}
         </label>
+
         <label className="flex flex-col gap-2 text-sm text-slate-300">
           Email
           <input
@@ -119,6 +169,7 @@ export default function ContactForm() {
           ) : null}
         </label>
       </div>
+
       <label className="flex flex-col gap-2 text-sm text-slate-300">
         Project details
         <textarea
@@ -137,12 +188,18 @@ export default function ContactForm() {
           </span>
         ) : null}
       </label>
+
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <Button type="submit">Send Message</Button>
+        <Button type="submit" disabled={submitting}>
+          {submitting ? "Sending..." : "Send Message"}
+        </Button>
+
         <p id="form-status" className="text-xs text-slate-400">
-          {submitted
-            ? "Thanks! We will respond within 24 hours."
-            : "We reply within one business day."}
+          {serverError
+            ? serverError
+            : submitted
+              ? "Thanks! We will respond within 24 hours."
+              : "We reply within one business day."}
         </p>
       </div>
     </form>
