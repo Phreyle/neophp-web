@@ -309,7 +309,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section
+        {/* <section
           id="projects"
           className="scroll-mt-24 border-t border-white/10 py-20"
           aria-labelledby="projects-title"
@@ -336,7 +336,7 @@ export default function Home() {
               <ProjectCard key={project.title} {...project} />
             ))}
           </div>
-        </section>
+        </section> */}
 
         <section
           id="team"
