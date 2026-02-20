@@ -328,7 +328,7 @@ export default function Home() {
             </div>
             <p className="max-w-xl text-sm text-slate-300">
               Each project pairs bold visual systems with measurable SEO and
-              conversion outcomes.
+              conversion outcomes
             </p>
           </div>
           <div className="mt-10 grid gap-6 lg:grid-cols-3">
