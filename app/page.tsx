@@ -236,11 +236,11 @@ export default function Home() {
                   Explore Services
                 </Button>
               </div>
-              <div className="mt-10 grid gap-4 sm:grid-cols-3 sm:gap-6">
+              {/* <div className="mt-10 grid gap-4 sm:grid-cols-3 sm:gap-6">
                 {[
-                  { label: "10+", text: "Years of craft" },
-                  { label: "5", text: "Core disciplines" },
-                  { label: "24h", text: "Response time" },
+                  { label: "5", text: "Years of craft" },
+                  { label: "3", text: "Core disciplines" },
+                  { label: "24/7", text: "Response time" },
                 ].map((stat) => (
                   <div
                     key={stat.label}
@@ -254,7 +254,7 @@ export default function Home() {
                     </p>
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
             <div className="relative">
               <div className="absolute inset-0 -z-10 rounded-[32px] bg-gradient-to-br from-neon-purple/30 via-neon-blue/30 to-neon-cyan/20 blur-2xl" />
@@ -403,15 +403,7 @@ export default function Home() {
                   <div className="flex gap-4">
                     <a
                       className="text-slate-300 transition hover:text-white"
-                      href="https://www.linkedin.com"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      LinkedIn
-                    </a>
-                    <a
-                      className="text-slate-300 transition hover:text-white"
-                      href="https://www.facebook.com/hercrafts.sk"
+                      href="https://www.facebook.com/neophp"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -419,7 +411,7 @@ export default function Home() {
                     </a>
                     <a
                       className="text-slate-300 transition hover:text-white"
-                      href="https://www.instagram.com"
+                      href="https://www.instagram.com/neophp"
                       target="_blank"
                       rel="noreferrer"
                     >

@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import Button from "./Button";
+import { useEffect, useState } from "react";
+
 
 const navItems = [
-  { label: "Services", href: "#services" },
+  { label: "Services", href: "#service" },
   { label: "Projects", href: "#projects" },
   { label: "Team", href: "#team" },
   { label: "Contact", href: "#contact" },
@@ -46,8 +47,8 @@ export default function Header() {
           <Image
             src="/images/neophp-mark.svg"
             alt="NeoPHP logo"
-            width={40}
-            height={40}
+            width={60}
+            height={60}
             priority
           />
           <span className="text-lg font-semibold tracking-wide text-white">

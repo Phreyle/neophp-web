@@ -1,9 +1,8 @@
 import Link from "next/link";
 
 const socialLinks = [
-  { label: "GitHub", href: "https://github.com" },
-  { label: "LinkedIn", href: "https://www.linkedin.com" },
-  { label: "Dribbble", href: "https://dribbble.com" },
+  { label: "Facebook", href: "https://www.facebook.com/neophp" },
+  { label: "Instagram", href: "https://www.instagram.com/neophp" },
 ];
 
 export default function Footer() {
